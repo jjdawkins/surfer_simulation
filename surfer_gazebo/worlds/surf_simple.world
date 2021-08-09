@@ -1,0 +1,201 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="default">
+
+    <gui>
+      <camera name="user_camera">
+        <pose>-5 6.5 13 0 0.9 0</pose>
+      </camera>
+    </gui>
+
+
+     <light type="point" name="light_1" cast_shadows="true">
+        <origin pose="0 0 5 0 0 0"/>
+        <diffuse rgba="0.5 0.5 0.5 1"/>
+        <specular rgba=".1 .1 .1 1"/>
+
+      </light>
+
+      <light type="point" name="light_2" cast_shadows="true">
+         <origin pose="2.5 0 5 0 0 0"/>
+         <diffuse rgba="0.5 0.5 0.5 1"/>
+         <specular rgba=".1 .1 .1 1"/>
+       </light>
+
+       <light type="point" name="light_3" cast_shadows="true">
+          <origin pose="5 0 5 0 0 0"/>
+          <diffuse rgba="0.5 0.5 0.5 1"/>
+          <specular rgba=".1 .1 .1 1"/>
+        </light>
+        <light type="point" name="light_4" cast_shadows="true">
+           <origin pose="0 6.5 5 0 0 0"/>
+           <diffuse rgba="0.5 0.5 0.5 1"/>
+           <specular rgba=".1 .1 .1 1"/>
+         </light>
+
+         <light type="point" name="light_5" cast_shadows="true">
+            <origin pose="2.5 6.5 5 0 0 0"/>
+            <diffuse rgba="0.5 0.5 0.5 1"/>
+            <specular rgba=".1 .1 .1 1"/>
+          </light>
+
+          <light type="point" name="light_6" cast_shadows="true">
+             <origin pose="5 6.5 5 0 0 0"/>
+             <diffuse rgba="0.5 0.5 0.5 1"/>
+             <specular rgba=".1 .1 .1 1"/>
+           </light>
+           <light type="point" name="light_7" cast_shadows="true">
+              <origin pose="0 12 5 0 0 0"/>
+              <diffuse rgba="0.5 0.5 0.5 1"/>
+              <specular rgba=".1 .1 .1 1"/>
+            </light>
+
+            <light type="point" name="light_8" cast_shadows="true">
+               <origin pose="2.5 12 5 0 0 0"/>
+               <diffuse rgba=".9 .9 .9 1"/>
+               <specular rgba=".1 .1 .1 1"/>
+             </light>
+
+             <light type="point" name="light_9" cast_shadows="true">
+                <origin pose="5 12 5 0 0 0"/>
+                <diffuse rgba=".9 .9 .9 1"/>
+                <specular rgba=".1 .1 .1 1"/>
+              </light>
+
+    <model name="nimitz_wall">
+      <pose>6 0 -2.44 0 0 0</pose>
+      <static>true</static>
+      <link name="base_link">
+      <collision name="nimitz_wall_col">
+         <geometry>
+           <box>
+             <size>12.5 0.5 4.87</size>
+           </box>
+         </geometry>
+       </collision>
+       <visual name="nimitz_wall_visual">
+         <transparency>0.3</transparency>
+         <geometry>
+           <box>
+             <size>12.5 0.5 4.87</size>
+           </box>
+         </geometry>
+       </visual>
+       </link>
+    </model>
+
+    <model name="creek_wall">
+      <pose>0 6.5 -2.44 0 0 1.57 </pose>
+      <static>true</static>
+      <link name="base_link">
+      <collision name="creek_wall_col">
+         <geometry>
+           <box>
+             <size>13.5 0.5 4.87</size>
+           </box>
+         </geometry>
+       </collision>
+       <visual name="creek_wall_visual">
+         <transparency>0.3</transparency>
+         <geometry>
+           <box>
+             <size>13.5 0.5 4.87</size>
+           </box>
+         </geometry>
+       </visual>
+       </link>
+    </model>
+
+    <model name="hall_wall">
+      <pose>12 6.5 -2.44 0 0 1.57</pose>
+      <static>true</static>
+      <link name="base_link">
+      <collision name="hall_wall_col">
+         <geometry>
+           <box>
+             <size>13.5 0.5 4.87</size>
+           </box>
+         </geometry>
+       </collision>
+       <visual name="hall_wall_visual">
+         <transparency>0.3</transparency>
+         <geometry>
+           <box>
+             <size>13.5 0.5 4.87</size>
+           </box>
+         </geometry>
+       </visual>
+       </link>
+    </model>
+    <model name="naoe_wall">
+      <pose>6 13 -2.44 0 0 0</pose>
+      <static>true</static>
+      <link name="base_link">
+      <collision name="naoe_wall_col">
+         <geometry>
+           <box>
+             <size>12.5 0.5 4.87</size>
+           </box>
+         </geometry>
+       </collision>
+       <visual name="naoe_wall_visual">
+         <transparency>0.3</transparency>
+         <geometry>
+           <box>
+             <size>12.5 0.5 4.87</size>
+           </box>
+         </geometry>
+       </visual>
+       </link>
+    </model>
+    <model name="pool_bottom">
+      <pose>6 6.5 -4.87 0 0 0</pose>
+      <static>true</static>
+      <link name="base_link">
+      <collision name="pool_bottom_col">
+         <geometry>
+           <box>
+             <size>12.5 13.5 0.5</size>
+           </box>
+         </geometry>
+       </collision>
+       <visual name="pool_bottom_visual">
+         <transparency>0.05</transparency>
+         <geometry>
+           <box>
+             <size>12.5 13.5 0.5</size>
+           </box>
+         </geometry>
+       </visual>
+       </link>
+    </model>
+
+    <model name="water_surface">
+      <pose>6 6.5 -0.25 0 0 0</pose>
+      <static>true</static>
+      <link name="base_link">
+      <collision name="water_surface_col">
+         <geometry>
+           <plane>
+             <normal>0 0 1</normal>
+           </plane>
+         </geometry>
+       </collision>
+       <visual name="water_visual">
+         <transparency>0.5</transparency>
+         <material>
+           <ambient>0 0.2 0.2 0.5</ambient>
+           <diffuse>0 0.2 0.2 0.5</diffuse>
+         </material>
+         <geometry>
+           <plane>
+             <normal>0 0 1</normal>
+             <size>12 13</size>
+           </plane>
+         </geometry>
+       </visual>
+       </link>
+    </model>
+
+  </world>
+</sdf>
