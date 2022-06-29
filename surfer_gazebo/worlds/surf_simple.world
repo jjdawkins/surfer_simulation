@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<sdf version="1.4">
+<sdf version="1.8">
   <world name="default">
 
     <gui>
@@ -7,60 +7,163 @@
         <pose>-5 6.5 13 0 0.9 0</pose>
       </camera>
     </gui>
+    <physics name="1ms" type="ignored">
+        <max_step_size>0.001</max_step_size>
+        <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin
+        filename="libignition-gazebo-physics-system"
+        name="ignition::gazebo::systems::Physics">
+    </plugin>
+    <plugin
+        filename="libignition-gazebo-user-commands-system"
+        name="ignition::gazebo::systems::UserCommands">
+    </plugin>
+    <plugin
+        filename="libignition-gazebo-scene-broadcaster-system"
+        name="ignition::gazebo::systems::SceneBroadcaster">
+    </plugin>
+
+    <!--plugin
+          filename="ignition-gazebo-buoyancy-system"
+          name="ignition::gazebo::systems::Buoyancy">
+          <graded_buoyancy>
+            <default_density>1000</default_density>
+            <density_change>
+              <above_depth>0</above_depth>
+              <density>1</density>
+            </density_change>
+          </graded_buoyancy>
+
+      </plugin-->
 
 
-     <light type="point" name="light_1" cast_shadows="true">
-        <origin pose="0 0 5 0 0 0"/>
-        <diffuse rgba="0.5 0.5 0.5 1"/>
-        <specular rgba=".1 .1 .1 1"/>
 
+      <!--model name="surfer">
+        <plugin
+          filename="/home/arty/ros2_ws/src/surfer_simulation/surfer_gazebo_plugins/buoyant_link/build/libBuoyantLink.so"
+          name="ignition::gazebo::systems::BuoyantLink">
+          <link_name>hull</link_name>
+          <surface_name>water_plane</surface_name>
+        </plugin>
+
+
+        <plugin
+        filename="ignition-gazebo-hydrodynamics-system"
+        name="ignition::gazebo::systems::Hydrodynamics">
+            <link_name>hull</link_name>
+            <xDotU>5</xDotU>
+            <yDotV>5</yDotV>
+            <zDotW>5</zDotW>
+            <kDotP>0</kDotP>
+            <mDotQ>0</mDotQ>
+            <nDotR>0</nDotR>
+            <xUU>0</xUU>
+            <xU>-20</xU>
+            <yVV>0</yVV>
+            <yV>-20</yV>
+            <zWW>0</zWW>
+            <zW>-50</zW>
+            <kPP>0</kPP>
+            <kP>-7</kP>
+            <mQQ>0</mQQ>
+            <mQ>-7</mQ>
+            <nRR>0</nRR>
+            <nR>-10</nR>
+        </plugin>
+
+
+        <pose>6 6 1 0 0 0 </pose>
+        <link name="hull">
+          <visual name="visual">
+            <geometry>
+              <box>
+                <size>0.5 0.5 0.3</size>
+              </box>
+            </geometry>
+            <material>
+              <ambient>0.5 0.5 1.0 1</ambient>
+              <diffuse>0.5 0.5 1.0 1</diffuse>
+              <specular>0.0 0.0 1.0 1</specular>
+            </material>
+          </visual>
+          <collision name="collision">
+            <geometry>
+              <box>
+                <size>0.5 0.5 0.3</size>
+              </box>
+            </geometry>
+          </collision>
+          <inertial>
+            <mass>30</mass>
+            <inertia>
+              <ixx>1</ixx>
+              <ixy>0</ixy>
+              <ixz>0</ixz>
+              <iyy>1</iyy>
+              <iyz>0</iyz>
+              <izz>0.5</izz>
+            </inertia>
+          </inertial>
+
+          <plugin
+            filename="ignition-gazebo-thruster-system"
+            name="ignition::gazebo::systems::Thruster">
+            <namespace>thruster</namespace>
+            <joint_name>propeller_joint</joint_name>
+            <thrust_coefficient>0.004422</thrust_coefficient>
+            <fluid_density>1000</fluid_density>
+            <propeller_diameter>0.2</propeller_diameter>
+          </plugin>
+        </link>
+
+        <link name ="propeller">
+          <pose>-0.3 0 0 0 0 0</pose>
+          <visual name="visual">
+            <geometry>
+              <cylinder>
+                <radius>0.05</radius>
+                <length>0.03</length>
+              </cylinder>
+            </geometry>
+          </visual>
+          <collision name="collision">
+            <geometry>
+              <cylinder>
+                <radius>0.05</radius>
+                <length>0.03</length>
+              </cylinder>
+            </geometry>
+          </collision>
+
+        </link>
+
+        <joint name="propeller_joint" type="revolute">
+          <pose>-0.3 0 0 0 0 0</pose>
+          <parent>hull</parent>
+          <child>propeller</child>
+          <axis>
+            <xyz>1 0 0</xyz>
+          </axis>
+        </joint>
+
+      </model-->
+
+     <light type="directional" name="light_1" cast_shadows="true">
+
+        <pose>0 0 5 0 0 0</pose>
+        <diffuse>0.5 0.5 0.5 1</diffuse>
+        <specular>.1 .1 .1 1</specular>
+        <attenuation>
+            <range>1000</range>
+            <constant>0.9</constant>
+            <linear>0.01</linear>
+            <quadratic>0.001</quadratic>
+        </attenuation>
+        <direction>-0.5 0.1 -0.9</direction>
       </light>
 
-      <light type="point" name="light_2" cast_shadows="true">
-         <origin pose="2.5 0 5 0 0 0"/>
-         <diffuse rgba="0.5 0.5 0.5 1"/>
-         <specular rgba=".1 .1 .1 1"/>
-       </light>
-
-       <light type="point" name="light_3" cast_shadows="true">
-          <origin pose="5 0 5 0 0 0"/>
-          <diffuse rgba="0.5 0.5 0.5 1"/>
-          <specular rgba=".1 .1 .1 1"/>
-        </light>
-        <light type="point" name="light_4" cast_shadows="true">
-           <origin pose="0 6.5 5 0 0 0"/>
-           <diffuse rgba="0.5 0.5 0.5 1"/>
-           <specular rgba=".1 .1 .1 1"/>
-         </light>
-
-         <light type="point" name="light_5" cast_shadows="true">
-            <origin pose="2.5 6.5 5 0 0 0"/>
-            <diffuse rgba="0.5 0.5 0.5 1"/>
-            <specular rgba=".1 .1 .1 1"/>
-          </light>
-
-          <light type="point" name="light_6" cast_shadows="true">
-             <origin pose="5 6.5 5 0 0 0"/>
-             <diffuse rgba="0.5 0.5 0.5 1"/>
-             <specular rgba=".1 .1 .1 1"/>
-           </light>
-           <light type="point" name="light_7" cast_shadows="true">
-              <origin pose="0 12 5 0 0 0"/>
-              <diffuse rgba="0.5 0.5 0.5 1"/>
-              <specular rgba=".1 .1 .1 1"/>
-            </light>
-
-            <light type="point" name="light_8" cast_shadows="true">
-               <origin pose="2.5 12 5 0 0 0"/>
-               <diffuse rgba=".9 .9 .9 1"/>
-               <specular rgba=".1 .1 .1 1"/>
-             </light>
-
-             <light type="point" name="light_9" cast_shadows="true">
-                <origin pose="5 12 5 0 0 0"/>
-                <diffuse rgba=".9 .9 .9 1"/>
-                <specular rgba=".1 .1 .1 1"/>
-              </light>
 
     <model name="nimitz_wall">
       <pose>6 0 -2.44 0 0 0</pose>
@@ -74,8 +177,11 @@
          </geometry>
        </collision>
        <visual name="nimitz_wall_visual">
-         <transparency>0.3</transparency>
-         <geometry>
+         <material>
+           <ambient>0.5 0.5 0.5 1.0</ambient>
+           <diffuse>0.5 0.5 0.5 1.0</diffuse>
+           <specular>0.5 0.5 0.5 1.0</specular>
+         </material>         <geometry>
            <box>
              <size>12.5 0.5 4.87</size>
            </box>
@@ -96,8 +202,11 @@
          </geometry>
        </collision>
        <visual name="creek_wall_visual">
-         <transparency>0.3</transparency>
-         <geometry>
+         <material>
+           <ambient>0.5 0.5 0.5 1.0</ambient>
+           <diffuse>0.5 0.5 0.5 1.0</diffuse>
+           <specular>0.5 0.5 0.5 1.0</specular>
+         </material>         <geometry>
            <box>
              <size>13.5 0.5 4.87</size>
            </box>
@@ -118,8 +227,11 @@
          </geometry>
        </collision>
        <visual name="hall_wall_visual">
-         <transparency>0.3</transparency>
-         <geometry>
+         <material>
+           <ambient>0.5 0.5 0.5 1.0</ambient>
+           <diffuse>0.5 0.5 0.5 1.0</diffuse>
+           <specular>0.5 0.5 0.5 1.0</specular>
+         </material>         <geometry>
            <box>
              <size>13.5 0.5 4.87</size>
            </box>
@@ -139,7 +251,11 @@
          </geometry>
        </collision>
        <visual name="naoe_wall_visual">
-         <transparency>0.3</transparency>
+         <material>
+           <ambient>0.5 0.5 0.5 1.0</ambient>
+           <diffuse>0.5 0.5 0.5 1.0</diffuse>
+           <specular>0.5 0.5 0.5 1.0</specular>
+         </material>
          <geometry>
            <box>
              <size>12.5 0.5 4.87</size>
@@ -160,7 +276,11 @@
          </geometry>
        </collision>
        <visual name="pool_bottom_visual">
-         <transparency>0.05</transparency>
+         <material>
+           <ambient>0.5 0.5 0.5 1.0</ambient>
+           <diffuse>0.5 0.5 0.5 1.0</diffuse>
+           <specular>0.5 0.5 0.5 1.0</specular>
+         </material>
          <geometry>
            <box>
              <size>12.5 13.5 0.5</size>
@@ -170,28 +290,55 @@
        </link>
     </model>
 
-    <model name="water_surface">
+    <model name="water_plane">
       <pose>6 6.5 -0.25 0 0 0</pose>
       <static>true</static>
-      <link name="base_link">
-      <collision name="water_surface_col">
+      <link name="link">
+      <!--collision name="water_surface_col">
          <geometry>
            <plane>
              <normal>0 0 1</normal>
            </plane>
          </geometry>
-       </collision>
-       <visual name="water_visual">
-         <transparency>0.5</transparency>
+       </collision-->
+       <visual name="water_plane">
+         <!--transparency>0.5</transparency-->
          <material>
-           <ambient>0 0.2 0.2 0.5</ambient>
-           <diffuse>0 0.2 0.2 0.5</diffuse>
+           <ambient>0 0.5 0.8 0.9</ambient>
+           <diffuse>0 0.5 0.8 0.9</diffuse>
+           <specular>0 0.5 0.8 0.9</specular>
          </material>
          <geometry>
            <plane>
              <normal>0 0 1</normal>
              <size>12 13</size>
            </plane>
+         </geometry>
+       </visual>
+       </link>
+    </model>
+    <model name="water_box">
+      <pose>6 6.5 -2.44 0 0 0</pose>
+      <static>true</static>
+      <link name="link">
+      <!--collision name="water_surface_col">
+         <geometry>
+           <plane>
+             <normal>0 0 1</normal>
+           </plane>
+         </geometry>
+       </collision-->
+       <visual name="water_box">
+         <!--transparency>0.5</transparency-->
+         <material>
+           <ambient>0 0.5 0.8 0.9</ambient>
+           <diffuse>0 0.5 0.8 0.9</diffuse>
+           <specular>0 0.5 0.8 0.9</specular>
+         </material>
+         <geometry>
+           <box>
+             <size>12 13 4</size>
+           </box>
          </geometry>
        </visual>
        </link>
