@@ -1,0 +1,435 @@
+<?xml version="1.0"?>
+<sdf version="1.8">
+
+<!-- Gazebo references -->
+
+<model name="surfer">
+  <plugin
+    filename="/home/arty/ros2_ws/src/surfer_simulation/surfer_gazebo_plugins/buoyant_link/build/libBuoyantLink.so"
+    name="ignition::gazebo::systems::BuoyantLink">
+    <link_name>hull</link_name>
+    <surface_name>water_plane</surface_name>
+  </plugin>
+
+  <plugin
+  filename="ignition-gazebo-hydrodynamics-system"
+  name="ignition::gazebo::systems::Hydrodynamics">
+      <link_name>hull</link_name>
+      <xDotU>5</xDotU>
+      <yDotV>5</yDotV>
+      <zDotW>5</zDotW>
+      <kDotP>1</kDotP>
+      <mDotQ>1</mDotQ>
+      <nDotR>0</nDotR>
+      <xUU>0</xUU>
+      <xU>-15</xU>
+      <yVV>0</yVV>
+      <yV>-15</yV>
+      <zWW>0</zWW>
+      <zW>-75</zW>
+      <kPP>0</kPP>
+      <kP>-17</kP>
+      <mQQ>0</mQQ>
+      <mQ>-17</mQ>
+      <nRR>0</nRR>
+      <nR>-10</nR>
+  </plugin>
+
+  <plugin
+    filename="ignition-gazebo-joint-controller-system"
+    name="ignition::gazebo::systems::JointController">
+    <use_force_commands>true</use_force_commands>
+    <joint_name>propeller_joint_fl</joint_name>
+    <p_gain>100.0</p_gain>
+    <i_gain>1.0</i_gain>
+    <cmd_max>10</cmd_max>
+    <cmd_min>-10</cmd_min>
+  </plugin>
+  <plugin
+    filename="ignition-gazebo-joint-controller-system"
+    name="ignition::gazebo::systems::JointController">
+    <use_force_commands>true</use_force_commands>
+    <joint_name>propeller_joint_fr</joint_name>
+    <p_gain>100.0</p_gain>
+    <i_gain>1.0</i_gain>
+    <cmd_max>10</cmd_max>
+    <cmd_min>-10</cmd_min>
+  </plugin>
+  <plugin
+    filename="ignition-gazebo-joint-controller-system"
+    name="ignition::gazebo::systems::JointController">
+    <use_force_commands>true</use_force_commands>
+    <joint_name>propeller_joint_bl</joint_name>
+    <p_gain>100.0</p_gain>
+    <i_gain>1.0</i_gain>
+    <cmd_max>10</cmd_max>
+    <cmd_min>-10</cmd_min>
+  </plugin>
+  <plugin
+    filename="ignition-gazebo-joint-controller-system"
+    name="ignition::gazebo::systems::JointController">
+    <use_force_commands>true</use_force_commands>
+    <joint_name>propeller_joint_br</joint_name>
+    <p_gain>100.0</p_gain>
+    <i_gain>1.0</i_gain>
+    <cmd_max>10</cmd_max>
+    <cmd_min>-10</cmd_min>
+  </plugin>
+  <plugin
+    filename="/home/arty/ros2_ws/src/surfer_simulation/surfer_gazebo_plugins/propeller_link/build/libPropeller.so"
+    name="ignition::gazebo::systems::Propeller">
+    <joint_name>propeller_joint_fl</joint_name>
+    <thrust_coefficient>0.0003</thrust_coefficient>
+    <drag_coefficient>0.0000</drag_coefficient>
+    <fluid_density>1000</fluid_density>
+    <propeller_diameter>0.2</propeller_diameter>
+  </plugin>
+  <plugin
+    filename="/home/arty/ros2_ws/src/surfer_simulation/surfer_gazebo_plugins/propeller_link/build/libPropeller.so"
+    name="ignition::gazebo::systems::Propeller">
+    <joint_name>propeller_joint_fr</joint_name>
+    <thrust_coefficient>0.0003</thrust_coefficient>
+    <drag_coefficient>0.0000</drag_coefficient>
+    <fluid_density>1000</fluid_density>
+    <propeller_diameter>0.2</propeller_diameter>
+  </plugin>
+  <plugin
+    filename="/home/arty/ros2_ws/src/surfer_simulation/surfer_gazebo_plugins/propeller_link/build/libPropeller.so"
+    name="ignition::gazebo::systems::Propeller">
+    <joint_name>propeller_joint_bl</joint_name>
+    <thrust_coefficient>0.0003</thrust_coefficient>
+    <drag_coefficient>0.0000</drag_coefficient>
+    <fluid_density>1000</fluid_density>
+    <propeller_diameter>0.2</propeller_diameter>
+  </plugin>
+  <plugin
+    filename="/home/arty/ros2_ws/src/surfer_simulation/surfer_gazebo_plugins/propeller_link/build/libPropeller.so"
+    name="ignition::gazebo::systems::Propeller">
+    <joint_name>propeller_joint_br</joint_name>
+    <thrust_coefficient>0.0003</thrust_coefficient>
+    <drag_coefficient>0.0000</drag_coefficient>
+    <fluid_density>1000</fluid_density>
+    <propeller_diameter>0.2</propeller_diameter>
+  </plugin>
+
+  <pose>6 6 1 0 0 0 </pose>
+  <link name="hull">
+    <visual name="visual">
+      <pose>0 0 0 0 0 0</pose>
+      <geometry>
+        <mesh>
+          <uri>/home/arty/ros2_ws/src/surfer_simulation/surfer_description/meshes/surf_hull.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.5 0.5 1.0 1</ambient>
+        <diffuse>0.5 0.5 1.0 1</diffuse>
+        <specular>0.0 0.0 1.0 1</specular>
+      </material>
+    </visual>
+    <collision name="collision">
+      <geometry>
+        <box>
+          <size>0.4 0.4 0.3</size>
+        </box>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass>25</mass>
+      <inertia>
+        <ixx>1.4</ixx>
+        <ixy>0</ixy>
+        <ixz>0</ixz>
+        <iyy>1.4</iyy>
+        <iyz>0</iyz>
+        <izz>2.8</izz>
+      </inertia>
+    </inertial>
+  </link>
+
+  <link name ="propeller_fl">
+    <pose>0.095 0.095 -0.011 0 0 -0.785</pose>
+    <visual name="visual_fl">
+      <geometry>
+        <mesh>
+          <uri>/home/arty/ros2_ws/src/surfer_simulation/surfer_description/meshes/T200_propeller.dae</uri>
+        </mesh>
+      </geometry>
+    </visual>
+    <collision name="collision_fl">
+      <geometry>
+        <box>
+          <size>0.01 0.05 0.02</size>
+        </box>
+      </geometry>
+      <surface>
+         <contact>
+           <collide_bitmask>0x01</collide_bitmask>
+         </contact>
+      </surface>
+    </collision>
+    <mass>0.005</mass>
+    <inertia>
+      <ixx>0.00000001</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>0.00000001</iyy>
+      <iyz>0</iyz>
+      <izz>0.00000001</izz>
+    </inertia>
+  </link>
+
+  <link name ="propeller_fr">
+    <pose>0.095 -0.095 -0.011 0 0 0.785</pose>
+    <visual name="visual_fr">
+      <geometry>
+        <mesh>
+          <uri>/home/arty/ros2_ws/src/surfer_simulation/surfer_description/meshes/T200_propeller.dae</uri>
+        </mesh>
+      </geometry>
+    </visual>
+    <collision name="collision_fl">
+      <geometry>
+        <box>
+          <size>0.01 0.05 0.02</size>
+        </box>
+      </geometry>
+      <surface>
+         <contact>
+           <collide_bitmask>0x01</collide_bitmask>
+         </contact>
+      </surface>
+    </collision>
+    <mass>0.005</mass>
+    <inertia>
+      <ixx>0.00000001</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>0.00000001</iyy>
+      <iyz>0</iyz>
+      <izz>0.00000001</izz>
+    </inertia>
+  </link>
+
+  <link name ="propeller_bl">
+    <pose>-0.095 0.095 -0.011 0 0 -2.356</pose>
+    <visual name="visual_bl">
+      <geometry>
+        <mesh>
+          <uri>/home/arty/ros2_ws/src/surfer_simulation/surfer_description/meshes/T200_propeller.dae</uri>
+        </mesh>
+      </geometry>
+    </visual>
+    <collision name="collision_bl">
+      <geometry>
+        <box>
+          <size>0.01 0.05 0.02</size>
+        </box>
+      </geometry>
+      <surface>
+         <contact>
+           <collide_bitmask>0x01</collide_bitmask>
+         </contact>
+      </surface>
+    </collision>
+    <mass>0.005</mass>
+    <inertia>
+      <ixx>0.00000001</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>0.00000001</iyy>
+      <iyz>0</iyz>
+      <izz>0.00000001</izz>
+    </inertia>
+  </link>
+
+  <link name ="propeller_br">
+    <pose>-0.095 -0.095 -0.011 0 0 2.356</pose>
+    <visual name="visual_br">
+      <geometry>
+        <mesh>
+          <uri>/home/arty/ros2_ws/src/surfer_simulation/surfer_description/meshes/T200_propeller.dae</uri>
+        </mesh>
+      </geometry>
+    </visual>
+    <collision name="collision_br">
+      <geometry>
+        <box>
+          <size>0.01 0.05 0.02</size>
+        </box>
+      </geometry>
+      <surface>
+         <contact>
+           <collide_bitmask>0x01</collide_bitmask>
+         </contact>
+      </surface>
+    </collision>
+    <mass>0.005</mass>
+    <inertia>
+      <ixx>0.00000001</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>0.00000001</iyy>
+      <iyz>0</iyz>
+      <izz>0.00000001</izz>
+    </inertia>
+  </link>
+
+  <joint name="propeller_joint_fl" type="revolute">
+    <pose>0 0 0 0 0 0</pose>
+    <parent>hull</parent>
+    <child>propeller_fl</child>
+    <axis>
+      <xyz>1 0 0</xyz>
+    </axis>
+  </joint>
+
+  <joint name="propeller_joint_fr" type="revolute">
+    <pose>0 0 0 0 0 0</pose>
+    <parent>hull</parent>
+    <child>propeller_fr</child>
+    <axis>
+      <xyz>1 0 0</xyz>
+    </axis>
+  </joint>
+
+  <joint name="propeller_joint_bl" type="revolute">
+    <pose>0 0 0 0 0 0</pose>
+    <parent>hull</parent>
+    <child>propeller_bl</child>
+    <axis>
+      <xyz>1 0 0</xyz>
+    </axis>
+  </joint>
+
+  <joint name="propeller_joint_br" type="revolute">
+    <pose>0 0 0 0 0 0</pose>
+    <parent>hull</parent>
+    <child>propeller_br</child>
+    <axis>
+      <xyz>1 0 0</xyz>
+    </axis>
+  </joint>
+
+  <link name="thruster_housing_fr">
+    <visual name="housing_fr">
+      <pose>0.095 -0.095 -0.011 -1.579 0 0.785</pose>
+      <geometry>
+        <mesh>
+          <uri>/home/arty/ros2_ws/src/surfer_simulation/surfer_description/meshes/T200_housing.dae</uri>
+        </mesh>
+      </geometry>
+    </visual>
+    <collision name="col_housing_fr">
+      <geometry>
+        <cylinder>
+          <radius>0.02</radius>
+          <length>0.03</length>
+        </cylinder>
+      </geometry>
+      <surface>
+         <contact>
+           <collide_bitmask>0x02</collide_bitmask>
+         </contact>
+      </surface>
+    </collision>
+  </link>
+
+  <joint name="housing_joint_fr" type="fixed">
+      <parent>hull</parent>
+      <child>thruster_housing_fr</child>
+  </joint>
+
+  <link name="thruster_housing_fl">
+    <visual name="vis_housing_fl">
+      <pose>0.095 0.095 -0.011 -1.579 0 -0.785</pose>
+      <geometry>
+        <mesh>
+          <uri>/home/arty/ros2_ws/src/surfer_simulation/surfer_description/meshes/T200_housing.dae</uri>
+        </mesh>
+      </geometry>
+    </visual>
+    <collision name="col_housing_fl">
+      <geometry>
+        <cylinder>
+          <radius>0.02</radius>
+          <length>0.03</length>
+        </cylinder>
+      </geometry>
+      <surface>
+         <contact>
+           <collide_bitmask>0x02</collide_bitmask>
+         </contact>
+      </surface>
+    </collision>
+  </link>
+
+  <joint name="housing_joint_fl" type="fixed">
+      <parent>hull</parent>
+      <child>thruster_housing_fl</child>
+  </joint>
+
+  <link name="thruster_housing_br">
+    <visual name="housing_br">
+      <pose>-0.095 -0.095 -0.011 -1.579 0 2.356</pose>
+      <geometry>
+        <mesh>
+          <uri>/home/arty/ros2_ws/src/surfer_simulation/surfer_description/meshes/T200_housing.dae</uri>
+        </mesh>
+      </geometry>
+    </visual>
+    <collision name="col_housing_br">
+      <geometry>
+        <cylinder>
+          <radius>0.02</radius>
+          <length>0.03</length>
+        </cylinder>
+      </geometry>
+      <surface>
+         <contact>
+           <collide_bitmask>0x02</collide_bitmask>
+         </contact>
+      </surface>
+    </collision>
+  </link>
+
+  <joint name="housing_joint_br" type="fixed">
+      <parent>hull</parent>
+      <child>thruster_housing_br</child>
+  </joint>
+
+  <link name="thruster_housing_bl">
+    <visual name="vis_housing_bl">
+      <pose>-0.095 0.095 -0.011 -1.579 0 -2.356</pose>
+      <geometry>
+        <mesh>
+          <uri>/home/arty/ros2_ws/src/surfer_simulation/surfer_description/meshes/T200_housing.dae</uri>
+        </mesh>
+      </geometry>
+    </visual>
+    <collision name="col_housing_bl">
+      <geometry>
+        <cylinder>
+          <radius>0.02</radius>
+          <length>0.03</length>
+        </cylinder>
+      </geometry>
+      <surface>
+         <contact>
+           <collide_bitmask>0x02</collide_bitmask>
+         </contact>
+      </surface>
+    </collision>
+  </link>
+
+  <joint name="housing_joint_bl" type="fixed">
+      <parent>hull</parent>
+      <child>thruster_housing_bl</child>
+  </joint>
+
+
+
+</model>
+
+
+</sdf>
